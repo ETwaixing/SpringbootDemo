@@ -1,3 +1,3 @@
 # Springbootdemo
-**git发布 集成mongodb springdata**
-springboot+springdata+mongodb
+# git发布 集成mongodb springdata #
+spring-boot+spring-data+mongodb

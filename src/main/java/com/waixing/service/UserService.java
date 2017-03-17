@@ -73,7 +73,7 @@ public class UserService {
         //mongoTemplate.updateFirst(new Query(criteria),update,User.class);
         return "OK";
     }
-    //聚合统计查询 sum和
+    //聚合统计查询 sum 和
     public int aggregationUserMoneyTotal(){
         Criteria criteria = new Criteria("name").regex("郭");
         MatchOperation matchOperation = match(criteria);
@@ -81,7 +81,7 @@ public class UserService {
         Document result = aggregate(matchOperation, groupOperation).getUniqueMappedResult();
         return result.getInteger("money",0);
     }
-    //聚合统计查询 age平均值
+    //聚合统计查询 age 平均值
     public Double aggregationUserMoneyAge(){
         MatchOperation matchOperation = match(new Criteria());
         GroupOperation groupOperation = group().avg("money").as("money");
