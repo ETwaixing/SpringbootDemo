@@ -12,12 +12,14 @@ public class User {
     private String id;
     private String name;
     private String age;
+    private int money;
     public User() {
     }
-    public User(String id, String name, String age) {
+    public User(String id, String name, String age, int money) {
         this.id = id;
         this.name = name;
         this.age = age;
+        this.money = money;
     }
     public void setId(String id) {
         this.id = id;
@@ -28,6 +30,9 @@ public class User {
     public void setAge(String age) {
         this.age = age;
     }
+    public void setMoney(int money) {
+        this.money = money;
+    }
     public String getId() {
         return id;
     }
@@ -37,12 +42,16 @@ public class User {
     public String getAge() {
         return age;
     }
+    public int getMoney() {
+        return money;
+    }
     @Override
     public String toString() {
         return "User{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", age='" + age + '\'' +
+                ", money=" + money +
                 '}';
     }
 }

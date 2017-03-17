@@ -36,5 +36,13 @@ public class UserController {
     public List<User> findByNameLike(String name){
         return userService.findByNameLike(name);
     }
+    @RequestMapping(value="/findAge")
+    public List<User> findAge(){ return userService.findByName(); }
+    @RequestMapping(value="/updateUser")
+    public String updateUser(){ return userService.updateUser(); }
+    @RequestMapping(value="/totalMoney")
+    public int getAllMoney(){ return userService.aggregationUserMoneyTotal(); }
+    @RequestMapping(value="/avgMoney")
+    public Double getAvgMoney(){ return userService.aggregationUserMoneyAge(); }
 
 }
