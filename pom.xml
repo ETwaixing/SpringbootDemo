@@ -19,11 +19,18 @@
     <version>1.4.0.RELEASE</version>
   </parent>
 
-  <!-- spring boot的mvc架构 相当于springMVC -->
   <dependencies>
+    <!-- spring boot的mvc架构 相当于springMVC -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <!-- 嵌入式j2ee开发 解析jsp-->
+    <dependency>
+      <groupId>org.apache.tomcat.embed</groupId>
+      <artifactId>tomcat-embed-jasper</artifactId>
+      <scope>compile</scope>
     </dependency>
 
     <!-- 增加mongodb支持 -->

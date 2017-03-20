@@ -9,9 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.http.HttpStatus;
 
 import java.net.UnknownHostException;
 
@@ -43,6 +46,16 @@ public class Application implements CommandLineRunner{
         System.out.println(mongoTemplate!=null);
         System.out.println(mongoClient!=null);
         System.out.println(mongoClientURI!=null);
+    }
+
+    //404 500错误页面访问设置
+    @Bean
+    public EmbeddedServletContainerCustomizer containerCustomizer() {
+        return (container -> {
+            ErrorPage error404Page = new ErrorPage(HttpStatus.NOT_FOUND, "/resources/404.html");
+            ErrorPage error500Page = new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, "/resources/500.html");
+            container.addErrorPages(error404Page, error500Page);
+        });
     }
 
     @Bean(name = "mongoClientURI")
