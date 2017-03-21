@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Springbootdemo" />
+        <module name="ylutil" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Springbootdemo" target="1.8" />
+      <module name="ylutil" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

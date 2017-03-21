@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Springbootdemo.iml" filepath="$PROJECT_DIR$/Springbootdemo.iml" />
+      <module fileurl="file://D:/Resource/GitHouse/ylutil/ylutil.iml" filepath="D:/Resource/GitHouse/ylutil/ylutil.iml" />
     </modules>
   </component>
 </project>
