@@ -1,8 +1,0 @@
-spring:
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/boot
-  mvc:
-    view:
-      prefix: /WEB-INF/jsp/
-      suffix: .jsp
