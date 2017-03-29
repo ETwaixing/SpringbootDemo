@@ -54,7 +54,7 @@
 
     <!-- 开始加载工具类需要的包 -->
 
-    <!-- google线程池 -->
+    <!-- google线程池   gson解析json操作   Guava工程  -->
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
