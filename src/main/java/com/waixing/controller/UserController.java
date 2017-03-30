@@ -13,7 +13,7 @@ import java.util.List;
  * Created by yonglang on 2017/3/15.
  */
 @RestController
-@RequestMapping(value="/waixing")
+@RequestMapping(value="/waixing/user")
 public class UserController {
     private final UserService userService;
     @Autowired

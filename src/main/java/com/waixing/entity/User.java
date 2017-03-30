@@ -3,7 +3,8 @@ package com.waixing.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-/**用户实体类 用注解进行标记
+/**
+ * 用户实体类 用注解进行标记
  * Created by yonglang on 2017/3/15.
  */
 @Document(collection = "user")

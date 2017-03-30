@@ -8,6 +8,8 @@ import java.util.List;
 
 /**
  * 用户数据库基本查询操作
+ * 数据源默认为@Primary注解的
+ *
  * Created by yonglang on 2017/3/15.
  */
 public interface UserRepository extends MongoRepository<User,String>{

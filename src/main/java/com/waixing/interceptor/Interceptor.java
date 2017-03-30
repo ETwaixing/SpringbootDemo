@@ -23,18 +23,20 @@ public class Interceptor implements HandlerInterceptor{
      */
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        setURL.add("/waixing/test");
-        setURL.add("/waixing/index");
-        setURL.add("/waixing/find");
-        String url = httpServletRequest.getRequestURI();
-        //System.out.println(url);
-        for (String s:setURL) {
-            if(url.equals(s)){
-                return true;
-            }
-        }
-        httpServletResponse.sendRedirect("/waixing/index");
-        return false;
+//        setURL.add("/waixing/test");
+//        setURL.add("/waixing/index");
+//        setURL.add("/waixing/find");
+//        String url = httpServletRequest.getRequestURI();
+//        //System.out.println(url);
+//        for (String s:setURL) {
+//            if(url.equals(s)){
+//                return true;
+//            }
+//        }
+//        httpServletResponse.sendRedirect("/waixing/index");
+//        return false;
+        //开放权限
+        return true;
     }
     /**
      * 这个方法只会在当前这个Interceptor的preHandle方法返回值为true的时候才会执行。postHandle是进行处理器拦截用的，它的执行时间是在处理器进行处理之

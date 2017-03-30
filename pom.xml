@@ -86,6 +86,12 @@
       <artifactId>httpclient</artifactId>
     </dependency>
 
+    <!--基础通用操作API等-->
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.6</version>
+    </dependency>
 
   </dependencies>
 

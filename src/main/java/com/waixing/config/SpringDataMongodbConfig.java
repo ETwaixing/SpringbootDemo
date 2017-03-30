@@ -12,7 +12,6 @@ public class SpringDataMongodbConfig {
     /* 数据库连接字符串*/
     @Value("${spring.data.mongodb.uri}")
     private String uri;
-
     public String getUri() {
         return uri;
     }

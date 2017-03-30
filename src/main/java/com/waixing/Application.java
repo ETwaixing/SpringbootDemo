@@ -43,9 +43,9 @@ public class Application implements CommandLineRunner{
     //测试mongo对象注入问题
     @Override
     public void run(String... strings) throws Exception {
-        System.out.println(mongoTemplate!=null);
-        System.out.println(mongoClient!=null);
-        System.out.println(mongoClientURI!=null);
+//        System.out.println(mongoTemplate!=null);
+//        System.out.println(mongoClient!=null);
+//        System.out.println(mongoClientURI!=null);
     }
 
     //404 500错误页面访问设置
