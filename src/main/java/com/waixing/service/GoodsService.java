@@ -32,12 +32,13 @@ public class GoodsService extends BaseService<Goods>{
         this.mongoTemplate = mongoTemplate;
         this.goodsRepository = goodsRepository;
     }
-    /*    新增商品   */
-    public Goods addGoods(String userId, String name, long price, String attribute, String status, String address){
+    /*    新增商品   insert 与  save的区别  */
+    /*   insert效率高 不会遍历整个表    save会遍历整个表 存在相同的即更新      */
+    public void addGoods(String userId, String name, long price, String attribute, String status, String address){
         long date = System.currentTimeMillis();
         Goods goods = new Goods(userId, name, price, gson.fromJson(attribute, ArrayList.class), status,
                 gson.fromJson(address, Map.class), date, date);
-        return goodsRepository.save(goods);
+        mongoTemplate.insert(goods);
     }
     /*    分页查询商品list    */
     public Map<String, Object> getGoodsList(String name, int page, int rows, String order, String sorts){

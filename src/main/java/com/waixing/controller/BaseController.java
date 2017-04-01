@@ -30,6 +30,12 @@ public class BaseController<T> {
     /**
      *  返回成功信息
      */
+    public static BackMessage returnSuccess(String code, String msg){
+        return new BackMessage(true, code, msg);
+    }
+    /**
+     *  返回成功信息
+     */
     public static BackMessage returnSuccess(String code, String msg,Object data){
         return new BackMessage(true, code, msg, data);
     }

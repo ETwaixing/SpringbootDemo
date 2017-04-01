@@ -34,8 +34,8 @@ public class GoodsRestController extends BaseController<Goods>{
             return returnFaild("0","用户id为空");
         }
         try {
-            Goods goods = goodsService.addGoods(userId, name, price, attribute, status, address);
-            return returnSuccess("1","新增成功", goods);
+            goodsService.addGoods(userId, name, price, attribute, status, address);
+            return returnSuccess("1","新增成功");
         }catch (Exception e){
             logger.error(e);
             return returnFaild("0","新增失败");

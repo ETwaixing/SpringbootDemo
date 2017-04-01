@@ -1,7 +1,10 @@
 spring:
   data:
     mongodb:
+      dbname: boot
       uri: mongodb://localhost:27017/boot
+      port: 27017
+      host: localhost
   mvc:
     view:
       prefix: /WEB-INF/jsp/
