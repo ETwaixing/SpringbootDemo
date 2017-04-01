@@ -78,6 +78,13 @@ public class BaseDao<T> {
         return list;
     }
     /**
+     *   聚合简单操作
+     *
+     */
+    public List<Document> aggregete(Bson... pipeline){
+        return mongoCollection.aggregate(Arrays.asList(pipeline)).into(new ArrayList<>());
+    }
+    /**
      *     通用获取count值
      */
     public long count(Criteria criteria){

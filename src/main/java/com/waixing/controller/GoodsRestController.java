@@ -5,11 +5,13 @@ import com.waixing.entity.Goods;
 import com.waixing.entity.back.BackMessage;
 import com.waixing.service.GoodsService;
 import com.waixing.utils.text.TextUtil;
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -77,6 +79,7 @@ public class GoodsRestController extends BaseController<Goods>{
     /**
      *    商品删除
      */
+    @RequestMapping(value = "deleteGoods.json")
     public BackMessage deleteGoods(String id){
         if(TextUtil.isEmpty(id)){
             return returnFaild("0","商品id为空");
@@ -91,6 +94,40 @@ public class GoodsRestController extends BaseController<Goods>{
         }catch (Exception e){
             logger.error(e);
             return returnFaild("0","删除失败");
+        }
+    }
+
+    /**
+     *    分组聚合查询 ----- 简单聚合
+     */
+    @RequestMapping(value="getAvgByUserId.json")
+    public BackMessage getAvgByUserId(String status){
+        if(TextUtil.isEmpty(status)){
+            return returnFaild("0","status为空");
+        }
+        try {
+            List<Document> list = goodsService.getAvgByUserId(status);
+            return  returnSuccess("1","聚合成功",list);
+        }catch (Exception e){
+            logger.error(e);
+            return returnFaild("0","聚合失败");
+        }
+    }
+
+    /**
+     *      分组集合查询  ----- 利用Bson进行聚合
+     */
+    @RequestMapping(value = "getAvgByUserIdAndBson.json")
+    public BackMessage getAvgByUserIdAndBson(String status){
+        if(TextUtil.isEmpty(status)){
+            return returnFaild("0","status为空");
+        }
+        try {
+            List<Document> list = goodsService.getAvgByUserIdAndBson(status);
+            return  returnSuccess("1","聚合成功",list);
+        }catch (Exception e){
+            logger.error(e);
+            return returnFaild("0","聚合失败");
         }
     }
 

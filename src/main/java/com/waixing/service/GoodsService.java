@@ -1,21 +1,23 @@
 package com.waixing.service;
 
+import com.mongodb.DBObject;
+import com.mongodb.Function;
 import com.waixing.dao.GoodsDao;
 import com.waixing.entity.Goods;
 import com.waixing.repository.GoodsRepository;
 import com.waixing.utils.text.TextUtil;
+import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Component;
-import org.springframework.data.domain.Sort.Direction;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import static com.mongodb.client.model.Filters.*;
 
 /**
  * Created by yonglang on 2017/3/30.
@@ -79,5 +81,52 @@ public class GoodsService extends BaseService<Goods>{
         Criteria criteria = new Criteria("_id").is(id);
         return dao.delete(criteria);
     }
+    /*    聚合统计 根据用户id分组求平均值 ----  简单常规聚合 */
+    public List<Document> getAvgByUserId(String status){
+        Criteria criteria = new Criteria("status").is(status);
+        MatchOperation match = Aggregation.match(criteria);
+        GroupOperation group = Aggregation.group("userId").first("userId").as("userId").sum("price").as("sum").avg("price").as("avg").count().as("count");
+        ProjectionOperation project = Aggregation.project("userId","sum","count","avg");
+        TypedAggregation<Goods> typedAggregation = Aggregation.newAggregation(Goods.class, match, group, project);
+        AggregationResults<Document> results = mongoTemplate.aggregate(typedAggregation, Document.class);
+        List<Document> list = new ArrayList<>();
+        results.forEach(document -> list.add(document));
+        return list;
+    }
+    /*  聚合统计 根据用户id分组求平均值 ----  利用Bson进行聚合     */
+    public List<Document> getAvgByUserIdAndBson(String status){
+        Criteria criteria = new Criteria("status").is(status);
+        Map map = criteria.getCriteriaObject().toMap();
+        Bson matchBson = new Document(map);
+        Bson match = eq("$match", matchBson);
+        Bson group = eq("$group", and(eq("_id", "$userId"), eq("sum", eq("$sum", "$price")),
+                eq("count", eq("$sum", 1)), eq("avg", eq("$avg", "$price"))));
+        Bson project =eq("$project",and(eq("_id",0),eq("sum",1),eq("count",1),
+                eq("avg",1),eq("date",new Date())));
+        return dao.aggregete(match, group, project);
+//                 Function 赋值？
+//        Function<Document, CompleteLog> mapper = doc -> {
+//            CompleteLog completeLog = new CompleteLog();
+//            Document completeLogtemp = doc.get("CompleteLogList", Document.class);
+//            completeLog.setPreCheckStatus(completeLogtemp.getString("preCheckStatus"));
+//            completeLog.setPreCheckName(completeLogtemp.getString("preCheckName"));
+//            completeLog.setVipLevel(completeLogtemp.getInteger("vipLevel", 0));
+//            try {
+//                String settledTime = String.valueOf(completeLogtemp.get("settledTime")) ;
+//                if (!isEmpty(settledTime)) {
+//                    completeLog.setSettledTime(Long.parseLong(settledTime));
+//                }
+//            }catch (Exception e){
+//                logger.warn("异常字段为：settledTime"+"异常数据id为："+completeLogtemp.getObjectId("id").toString());
+//                logger.warn("类型转换错误:"+e.getMessage());
+//            }
+//            ArrayList submitContent = completeLogtemp.get("submitContent", ArrayList.class);
+//            JSONArray jsonArray = JSONArray.fromObject(submitContent);
+//            completeLog.setSubmitContent(jsonArray);
+//            return completeLog;
+//        };
+    }
+
+
 
 }
