@@ -17,7 +17,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping(value="/waixing/Goods")
-public class GoodsRestController extends BaseController{
+public class GoodsRestController extends BaseController<Goods>{
     private final GoodsService goodsService;
     @Autowired
     public GoodsRestController(GoodsService goodsService) {

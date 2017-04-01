@@ -21,7 +21,7 @@ import java.util.Map;
  * Created by yonglang on 2017/3/30.
  */
 @Component
-public class GoodsService extends BaseService{
+public class GoodsService extends BaseService<Goods>{
     private final GoodsDao goodsDao;
     private final MongoTemplate mongoTemplate;
     private final GoodsRepository goodsRepository;
@@ -46,8 +46,8 @@ public class GoodsService extends BaseService{
         if(!TextUtil.isEmpty(name)){
             criteria.and("name").regex(name);
         }
-        long count = goodsDao.count(criteria);
-        List<Goods> list = goodsDao.getList(criteria, pageRequest);
+        long count = dao.count(criteria);
+        List<Goods> list = dao.getList(criteria, pageRequest);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("rows",list);
         map.put("totals",count);
@@ -71,12 +71,12 @@ public class GoodsService extends BaseService{
         }
         map.put("price",price);
         map.put("lastTime",System.currentTimeMillis());
-        return goodsDao.update(criteria, map);
+        return dao.update(criteria, map);
     }
     /*   删除商品资料  */
     public boolean deleteGoods(String id){
         Criteria criteria = new Criteria("_id").is(id);
-        return goodsDao.delete(criteria);
+        return dao.delete(criteria);
     }
 
 }

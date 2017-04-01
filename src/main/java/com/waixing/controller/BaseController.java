@@ -2,8 +2,10 @@ package com.waixing.controller;
 
 import com.google.gson.Gson;
 import com.waixing.entity.back.BackMessage;
+import com.waixing.service.BaseService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
@@ -13,11 +15,14 @@ import java.util.List;
  * 抽象控制器  公共方法集合
  * Created by yonglang on 2017/3/20.
  */
-public class BaseController {
+public class BaseController<T> {
     /**
      * log日志
      */
     public static Logger logger;
+
+    @Autowired
+    public BaseService<T> service;
 
     public BaseController(Class c) {
         this.logger = LogManager.getLogger(c);
